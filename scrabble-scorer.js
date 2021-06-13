@@ -1,7 +1,6 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
-// const {question} = require('readline-sync');
-const prompt = require('syncprompt');
+const {question} = require('readline-sync');
 
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
@@ -16,7 +15,7 @@ const oldPointStructure = {
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
-let initialPrompt = prompt("Let's play some scrabble!\n\nEnter a word to score: ");
+let initialPrompt = question("Let's play some scrabble!\n\nEnter a word to score: ");
 
 // const oldScrabbleScorer = (word) => {
 // 	let letterPoints = "";
@@ -25,7 +24,7 @@ let initialPrompt = prompt("Let's play some scrabble!\n\nEnter a word to score: 
  
 // 	  for (const pointValue in oldPointStructure) {
  
-// 		 if (oldPointStructure[pointValue].includes(word[i])) {prompt
+// 		 if (oldPointStructure[pointValue].includes(word[i])) {
 // 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 // 		 }
  
@@ -92,10 +91,10 @@ const scorerPrompt = () => {
                 '0 - Simple: One point per character\n' +
                 '1 - Vowel Bonus: Vowels are worth 3 points\n' +
                 '2 - Scrabble: Uses scrabble point system');
-    let chosenAlgorithm = prompt('Enter 0, 1, or 2: ');
+    let chosenAlgorithm = question('Enter 0, 1, or 2: ');
 
     while (chosenAlgorithm < 0 || chosenAlgorithm > 2 || isNaN(chosenAlgorithm)) {
-        chosenAlgorithm = prompt('Enter 0, 1, or 2: ');
+        chosenAlgorithm = question('Enter 0, 1, or 2: ');
     }
 
     return scoringAlgorithms[chosenAlgorithm];
