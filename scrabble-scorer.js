@@ -1,6 +1,6 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
-const {question} = require('readline-sync');
+const input = require('readline-sync');
 
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
@@ -15,23 +15,23 @@ const oldPointStructure = {
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
-let initialPrompt = question("Let's play some scrabble!\n\nEnter a word to score: ");
+let initialPrompt = input.question("Let's play some scrabble!\n\nEnter a word to score: ");
 
-const oldScrabbleScorer = (word) => {
-	let letterPoints = "";
+// const oldScrabbleScorer = (word) => {
+// 	let letterPoints = "";
  
-	for (let i = 0; i < word.length; i++) {
+// 	for (let i = 0; i < word.length; i++) {
  
-	  for (const pointValue in oldPointStructure) {
+// 	  for (const pointValue in oldPointStructure) {
  
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
+// 		 if (oldPointStructure[pointValue].includes(word[i])) {
+// 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+// 		 }
  
-	  }
-	}
-	return letterPoints;
- }
+// 	  }
+// 	}
+// 	return letterPoints;
+//  }
 
 const simpleScore = (word) => {
     let points = 0;
@@ -72,46 +72,17 @@ const scoringAlgorithms = [
     {
         name: "Simple Score",
         description: "Each letter is worth 1 point.",
-        scorerFunction: (word) => {
-            let points = 0;
-
-            for (let i = 0; i < word.length; i++) {
-                points += 1;
-            }
-
-            return points;
-        }
+        scorerFunction: word => simpleScore(word)
     },
     {
         name: "Bonus Vowels",
         description: "Vowels are 3 pts, consonants are 1 pt.",
-        scorerFunction: (word) => {
-            let points = 0;
-            const vowels = ['a', 'e', 'i', 'o', 'u'];
-
-            for (let i = 0; i < word.length; i++) {
-                if (vowels.includes(word[i].toLowerCase())) {
-                    points += 3;
-                } else {
-                    points += 1;
-                }
-            }
-
-            return points;
-        }
+        scorerFunction: word => vowelBonusScore(word)
     },
     {
         name: "Scrabble",
         description: "The traditional scoring algorithm.",
-        scorerFunction: (word) => {
-            let points = 0;
-        
-            for (let i = 0; i < word.length; i++) {
-                points += Number(newPointStructure[word[i].toLowerCase()]);
-            }
-
-            return points;
-        }
+        scorerFunction: word => scrabbleScore(word)
     }
 ];
 
@@ -120,10 +91,10 @@ const scorerPrompt = () => {
                 '0 - Simple: One point per character\n' +
                 '1 - Vowel Bonus: Vowels are worth 3 points\n' +
                 '2 - Scrabble: Uses scrabble point system');
-    let chosenAlgorithm = question('Enter 0, 1, or 2: ');
+    let chosenAlgorithm = input.question('Enter 0, 1, or 2: ');
 
     while (chosenAlgorithm < 0 || chosenAlgorithm > 2 || isNaN(chosenAlgorithm)) {
-        chosenAlgorithm = question('Enter 0, 1, or 2: ');
+        chosenAlgorithm = input.question('Enter 0, 1, or 2: ');
     }
 
     return scoringAlgorithms[chosenAlgorithm];
