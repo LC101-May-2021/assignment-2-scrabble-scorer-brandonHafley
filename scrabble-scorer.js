@@ -14,21 +14,21 @@ const oldPointStructure = {
 
 let initialPrompt = question("Let's play some scrabble!\n\nEnter a word to score: ");
 
-// const oldScrabbleScorer = (word) => {
-// 	let letterPoints = "";
+const oldScrabbleScorer = (word) => {
+	let letterPoints = "";
  
-// 	for (let i = 0; i < word.length; i++) {
+	for (let i = 0; i < word.length; i++) {
  
-// 	  for (const pointValue in oldPointStructure) {
+	  for (const pointValue in oldPointStructure) {
  
-// 		 if (oldPointStructure[pointValue].includes(word[i])) {
-// 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-// 		 }
+		 if (oldPointStructure[pointValue].includes(word[i])) {
+			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+		 }
  
-// 	  }
-// 	}
-// 	return letterPoints;
-//  }
+	  }
+	}
+	return letterPoints;
+ }
 
 const simpleScore = (word) => {
     let points = 0;
@@ -69,17 +69,17 @@ const scoringAlgorithms = [
     {
         name: "Simple Score",
         description: "Each letter is worth 1 point.",
-        scorerFunction: word => simpleScore(word)
+        scoringFunction: word => simpleScore(word)
     },
     {
         name: "Bonus Vowels",
         description: "Vowels are 3 pts, consonants are 1 pt.",
-        scorerFunction: word => vowelBonusScore(word)
+        scoringFunction: word => vowelBonusScore(word)
     },
     {
         name: "Scrabble",
         description: "The traditional scoring algorithm.",
-        scorerFunction: word => scrabbleScore(word)
+        scoringFunction: word => scrabbleScore(word)
     }
 ];
 
@@ -103,10 +103,10 @@ const transform = (scoringObject) => {
 
     for (let key in scoringObject) {
         for (let i = 0; i < scoringObject[key].length; i++) {
-            newScoringObject[scoringObject[key][i].toLowerCase()] = key;
+            newScoringObject[scoringObject[key][i].toLowerCase()] = Number(key);
         }
     }
-    newScoringObject[' '] = 0;
+    // newScoringObject[' '] = 0;
 
     return newScoringObject;
 };
@@ -115,7 +115,8 @@ let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
    const chosenScoringAlgo = scorerPrompt();
-   console.log(`Score for '${initialPrompt}': ${chosenScoringAlgo.scorerFunction(initialPrompt)}`);
+   console.log(`Score for '${initialPrompt}': ${chosenScoringAlgo.scoringFunction(initialPrompt)}`);
+   console.log(scoringAlgorithms.length);
 }
 
 module.exports = {
@@ -130,4 +131,3 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
-
