@@ -12,9 +12,6 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-// your job is to finish writing these functions and variables that we've named //
-// don't change the names or your program won't work as expected. //
-
 let initialPrompt = question("Let's play some scrabble!\n\nEnter a word to score: ");
 
 // const oldScrabbleScorer = (word) => {
@@ -121,8 +118,6 @@ function runProgram() {
    console.log(`Score for '${initialPrompt}': ${chosenScoringAlgo.scorerFunction(initialPrompt)}`);
 }
 
-// Don't write any code below this line //
-// And don't change these or your program will not run as expected //
 module.exports = {
    initialPrompt: initialPrompt,
    transform: transform,
