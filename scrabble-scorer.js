@@ -31,13 +31,7 @@ const oldScrabbleScorer = (word) => {
  }
 
 const simpleScore = (word) => {
-    let points = 0;
-
-    for (let i = 0; i < word.length; i++) {
-        points += 1;
-    }
-
-    return points;
+    return word.length;
 };
 
 const vowelBonusScore = (word) => {
@@ -69,17 +63,17 @@ const scoringAlgorithms = [
     {
         name: "Simple Score",
         description: "Each letter is worth 1 point.",
-        scoringFunction: word => simpleScore(word)
+        scoringFunction: simpleScore
     },
     {
         name: "Bonus Vowels",
         description: "Vowels are 3 pts, consonants are 1 pt.",
-        scoringFunction: word => vowelBonusScore(word)
+        scoringFunction: vowelBonusScore
     },
     {
         name: "Scrabble",
         description: "The traditional scoring algorithm.",
-        scoringFunction: word => scrabbleScore(word)
+        scoringFunction: scrabbleScore
     }
 ];
 
@@ -116,7 +110,6 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
    const chosenScoringAlgo = scorerPrompt();
    console.log(`Score for '${initialPrompt}': ${chosenScoringAlgo.scoringFunction(initialPrompt)}`);
-   console.log(scoringAlgorithms.length);
 }
 
 module.exports = {
