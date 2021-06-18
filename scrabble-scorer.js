@@ -65,9 +65,9 @@ let scrabbleScore = (word) => {
 
 const scoringAlgorithms = [
     {
-        name: "Simple Score",
-        description: "Each letter is worth 1 point.",
-        scoringFunction: simpleScore
+        name: "Scrabble",
+        description: "The traditional scoring algorithm.",
+        scoringFunction: scrabbleScore
     },
     {
         name: "Bonus Vowels",
@@ -75,22 +75,22 @@ const scoringAlgorithms = [
         scoringFunction: vowelBonusScore
     },
     {
-        name: "Scrabble",
-        description: "The traditional scoring algorithm.",
-        scoringFunction: scrabbleScore
+        name: "Simple Score",
+        description: "Each letter is worth 1 point.",
+        scoringFunction: simpleScore
     }
 ];
 
 const scorerPrompt = () => {
     console.log('Which scoring algorithm would you like to use?\n\n' +
-                '0 - Simple: One point per character\n' +
+                '0 - Scrabble: Uses scrabble point system\n' +
                 '1 - Vowel Bonus: Vowels are worth 3 points\n' +
-                '2 - Scrabble: Uses scrabble point system');
+                '2 - Simple: One point per character');
     let chosenAlgorithm = question('Enter 0, 1, or 2: ');
 
-    while (chosenAlgorithm < 0 || chosenAlgorithm > 2 || isNaN(chosenAlgorithm)) {
-        chosenAlgorithm = question('Enter 0, 1, or 2: ');
-    }
+    // while (chosenAlgorithm < 0 || chosenAlgorithm > 2 || isNaN(chosenAlgorithm)) {
+    //     chosenAlgorithm = question('Enter 0, 1, or 2: ');
+    // }
 
     return scoringAlgorithms[chosenAlgorithm];
 }
