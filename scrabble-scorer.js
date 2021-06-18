@@ -12,7 +12,11 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-let initialPrompt = question("Let's play some scrabble!\n\nEnter a word to score: ");
+let initialPrompt = () => {
+    console.log("Let's play some scrabble!\n\nEnter a word to score: ");
+}
+
+let userWord = question("Let's play some scrabble!\n\nEnter a word to score: ");
 
 const oldScrabbleScorer = (word) => {
 	let letterPoints = "";
@@ -108,8 +112,9 @@ const transform = (scoringObject) => {
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   const chosenScoringAlgo = scorerPrompt();
-   console.log(`Score for '${initialPrompt}': ${chosenScoringAlgo.scoringFunction(initialPrompt)}`);
+    initialPrompt();
+    const chosenScoringAlgo = scorerPrompt();
+    console.log(`Score for '${userWord}': ${chosenScoringAlgo.scoringFunction(userWord)}`);
 }
 
 module.exports = {
