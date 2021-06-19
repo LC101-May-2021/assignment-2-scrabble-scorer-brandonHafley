@@ -2,6 +2,10 @@
 
 const {question} = require('readline-sync');
 
+let initialPrompt = () => {
+    console.log("Let's play some scrabble!\n\nEnter a word to score: ");
+}
+
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
@@ -11,10 +15,6 @@ const oldPointStructure = {
   8: ['J', 'X'],
   10: ['Q', 'Z']
 };
-
-let initialPrompt = () => {
-    console.log("Let's play some scrabble!\n\nEnter a word to score: ");
-}
 
 let userWord = question("Let's play some scrabble!\n\nEnter a word to score: ");
 
