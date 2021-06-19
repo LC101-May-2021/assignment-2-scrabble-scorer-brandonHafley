@@ -3,8 +3,11 @@
 const {question} = require('readline-sync');
 
 let initialPrompt = () => {
-    console.log("Let's play some scrabble!\n\nEnter a word to score: ");
+    let userWord = question("Let's play some scrabble!\n\nEnter a word to score: ");
+    return userWord;
 }
+
+let userWord = initialPrompt();
 
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
@@ -16,7 +19,7 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-let userWord = question("Let's play some scrabble!\n\nEnter a word to score: ");
+
 
 const oldScrabbleScorer = (word) => {
 	let letterPoints = "";
@@ -112,7 +115,6 @@ const transform = (scoringObject) => {
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-    initialPrompt();
     const chosenScoringAlgo = scorerPrompt();
     console.log(`Score for '${userWord}': ${chosenScoringAlgo.scoringFunction(userWord)}`);
 }
